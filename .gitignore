@@ -31,5 +31,7 @@
 # Debug files
 *.dSYM/
 *.su
-/Debug
-/EjemploSockets/Debug/EjemploSockers
+/EjemploSocketsCliente/Debug
+/EjemploSocketsLisener/Debug
+/EjemploSocketsServidor/Debug
+
