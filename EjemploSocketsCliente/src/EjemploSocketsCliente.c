@@ -14,24 +14,25 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 
+#include "servidor.h"
+
 int main(void) {
-	struct sockaddr_in direccionServidor;
-	direccionServidor.sin_family = AF_INET;
-	direccionServidor.sin_addr.s_addr = inet_addr("127.0.0.1");
-	direccionServidor.sin_port = htons(8080);
+	//Me conecto al servidor
+	int servidor = connect_server();
 
-	int cliente = socket(AF_INET, SOCK_STREAM, 0);
-
-	if (connect(cliente, (void*) &direccionServidor, sizeof(direccionServidor)) != 0) {
-		perror("No se pudo conectar");
-		return 1;
+	//Si conecto, informo
+	if(servidor > 0){
+		printf("Ready to send \n");
 	}
 
+	//Bucle para el ingreso de datos
 	while (1) {
-		char mensaje[1000];
+		//Mensaje
+		char* mensaje = malloc(1000);
 		scanf("%s", mensaje);
-
-		send(cliente, mensaje, strlen(mensaje), 0);
+		//Envio el mensaje
+		send(servidor, mensaje, strlen(mensaje), 0);
+		free(mensaje);
 	}
 
 	return 0;
