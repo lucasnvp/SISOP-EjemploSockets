@@ -14,11 +14,11 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 
-#include "servidor.h"
+#include "servidor/servidor.h"
 
 int main(void) {
 	//Me conecto al servidor
-	int servidor = connect_server();
+	int servidor = connect_server("127.0.0.1",8080);
 
 	//Si conecto, informo
 	if(servidor > 0){

@@ -5,12 +5,12 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 
-int connect_server(){
+int connect_server(char* IP, int Port){
 	//Estructura del socket
 	struct sockaddr_in direccionServidor;
 	direccionServidor.sin_family = AF_INET;
-	direccionServidor.sin_addr.s_addr = inet_addr("127.0.0.1");
-	direccionServidor.sin_port = htons(8080);
+	direccionServidor.sin_addr.s_addr = inet_addr(IP);
+	direccionServidor.sin_port = htons(Port);
 
 	//Nro de cliente
 	int cliente;
@@ -27,4 +27,22 @@ int connect_server(){
 
 	//Retorno nro de conexion
 	return cliente;
+}
+
+void recive_data(int cliente){
+	//Buffer para almacenar datos
+	char *buffer = malloc(1000);
+	//Recibo datos
+	int bytesRecibidos = recv(cliente, buffer, 1000, 0);
+	//Valido los datos
+	if(bytesRecibidos <= 0){
+		perror("Desconectado");
+		exit(1);
+	}
+	//Agrego el fin de linea
+	buffer[bytesRecibidos] = '\0';
+	//Muestro los datos
+	printf("Received: %s\n", buffer);
+	//Libero la memoria del buffer
+	free(buffer);
 }

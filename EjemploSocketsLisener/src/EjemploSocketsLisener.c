@@ -12,12 +12,11 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 
-#define PORT 8080	// puerto en el que escuchamos
-#define CANTCONECIONES 10 	// Si quiero el maximo de conexiones posibles en el sockect reemplazar por 'SOMAXCONN'
+#include "servidor/servidor.h"
 
 int main(void) {
 	//Conexion al servidor
-	int cliente = connect_server();
+	int cliente = connect_server("127.0.0.1",8080);
 
 	//Si conecto, informo
 	if(cliente > 0){

@@ -35,3 +35,6 @@
 /EjemploSocketsLisener/Debug
 /EjemploSocketsServidor/Debug
 
+# Eclipse
+.metadata
+RemoteSystemsTempFiles
