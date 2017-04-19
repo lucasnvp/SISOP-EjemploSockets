@@ -133,6 +133,7 @@ void massive_send(int fdmax, fd_set *master, DatosRecibidos * buffer, int i, int
             }
         }
     }
+    DatosRecibidos_free(buffer);
 }
 
 DatosRecibidos * DatosRecibidos_new(char *datos,int bytesRecibidos){
